@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title th:text="${visitor.name}">Hello, world!</title>
+</head>
+<body>
+<div th:include="header :: headerr"></div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <h5 th:text="|Рейтинг продавца ${rating}|">...</h5>
+        </div>
+        <div th:if="${visitorAuth}">
+            <div class="col-6">
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Оценить продавца
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" th:href="@{/rating(sellerId=${sellerId},rat=1)}">1</a>
+                        <a class="dropdown-item" th:href="@{/rating(sellerId=${sellerId},rat=2)}">2</a>
+                        <a class="dropdown-item" th:href="@{/rating(sellerId=${sellerId},rat=3)}">3</a>
+                        <a class="dropdown-item" th:href="@{/rating(sellerId=${sellerId},rat=4)}">4</a>
+                        <a class="dropdown-item" th:href="@{/rating(sellerId=${sellerId},rat=5)}">5</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <h4 th:text="|Все товары продавца ${visitor.name}|">...</h4>
+</div>
+<div class="col">
+    <div class="card-group">
+        <ul th:each="product:${products}">
+            <li style="list-style-type: none">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" th:src="@{/pict(picId=${product.id})}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${product.name}">Название карточки</h5>
+                        <p class="card-text" th:text="${product.description}">...</p>
+                        <a class="btn btn-primary" name="prodId" th:href="@{/product(prodId=${product.id})}">Перейти к
+                            описанию</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

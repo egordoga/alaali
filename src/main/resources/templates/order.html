@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>Заказ</title>
+</head>
+<body>
+<div th:include="header :: headerr"></div>
+<div class="container">
+    <h2>Данные для отправки</h2>
+    <br/>
+    <div class="container">
+        <h2>Ваш заказ</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Количество</th>
+                <th>Цена</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td>Сумма Вашего заказа</td>
+                <td></td>
+                <td th:text="${sum}">...</td>
+            </tr>
+            </tfoot>
+            <tbody>
+            <tr th:each="prod:${prods}">
+                <td th:text="${prod.name}">Basic</td>
+                <td th:text="${prod.quantityForOder}">10$</td>
+                <td th:text="${prod.cost}">10$</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <form th:action="@{/order}" th:object="${order}" method="post">
+
+        <div class="form-group">
+            <label for="inputName">Получатель</label>
+            <input type="text" class="form-control" id="inputName" required th:field="*{recipient}"
+                   th:attr="value=${visitorAuth.name}">
+            <small id="nameHelp" class="form-text text-muted">ФИО получателя</small>
+        </div>
+
+        <div class="form-group">
+            <label for="inputPhone">Телефон</label>
+            <input type="text" class="form-control" id="inputPhone" required th:field="*{recipientPhone}"
+                   th:value="${visitorAuth.phone}">
+            <small id="priceHelp" class="form-text text-muted">Телефон получателя</small>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="inputPost">Номер отделения</label>
+                    <input type="number" class="form-control" id="inputPost" required th:field="*{number}"
+                           th:value="${basket.newPost != null} ? ${basket.newPost.number}:'Необходимо заполнить'">
+                    <small id="postHelp" class="form-text text-muted">Введите номер отделения</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="postCity">Город</label>
+                    <input type="text" class="form-control" id="postCity" required th:field="*{city}"
+                           th:value="${basket.newPost != null} ? ${basket.newPost.city}:'Необходимо заполнить'">
+                    <small id="sityHelp" class="form-text text-muted">Введите город</small>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Оплатить</button>
+
+    </form>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</body>
+</html>

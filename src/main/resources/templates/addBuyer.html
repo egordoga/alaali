@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--<meta http-equiv="Content-Type" charset="text/html; UTF-8">-->
+    <meta http-equiv="Content-Type" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>addBuyer</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">
+        <img src="http://localhost:63342/alaali/static/img/shop.jpg" width="50" height="40" alt="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupporttdContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#addBuyerModal">Toggle</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="modal fade" id="addBuyerModal" tabindex="-1" role="dialog" aria-labelledby="addBuyerModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addBuyerLabel">Modal visitor</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="#" th:action="@{/addBuyer}" th:object="${visitor}" method="post">
+                        <div class="form-group">
+                            <label for="inputEmail">Email adress</label>
+                            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+                                   placeholder="Email" required th:field="*{name}">
+                            <small id="emailHelp" class="form-text text-muted">Enter your email</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPass">Пароль</label>
+                            <input type="email" class="form-control" id="inputPass" placeholder="Пароль" required>
+                            <small id="passHelp" class="form-text text-muted">Введите пароль</small>
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+</div>
+<form action="#" th:action="@{/addBuyer}" th:object="${visitor}" method="post">
+    <p>First Field: <input type="text" th:field="*{name}"/></p>
+    <p>Пароль: <input type="text" th:field="*{pass}"/></p>
+    <p>Second Field: <input type="text" th:field="*{email}"/></p>
+    <p>Second Field: <input type="text" th:field="*{phone}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</body>
+<html/>

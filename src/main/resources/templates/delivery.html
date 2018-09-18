@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet'
+          href='https://apimgmtstorelinmtekiynqw.blob.core.windows.net/content/MediaLibrary/Widget/Tracking/styles/tracking.css'/>
+
+    <title>Отслеживание</title>
+</head>
+<body>
+<div th:include="header :: headerr"></div>
+<div class="container">
+    <h3>Отследить посылку</h3>
+    <div id="np-tracking" class="np-w-br-0">
+        <div id="np-first-state">
+            <div id="np-tracking-logo"></div>
+            <div id="np-title">
+                <div class="np-h1"><span class="np-h1-span1">ВІДСТЕЖЕННЯ</span> <br> <span
+                        class="np-h1-span2">ПОСИЛОК</span></div>
+            </div>
+            <div id="np-input-container">
+                <div id="np-clear-input"></div>
+                <input id="np-user-input" type="text" name="number" placeholder="Номер посилки"></div>
+            <div id="np-warning-message"></div>
+            <button id="np-submit-tracking" type="button" disabled=""
+                    style="background-color: rgb(209, 213, 218); border: 1px solid rgb(196, 196, 196);"><span
+                    id="np-text-button-tracking">ВІДСТЕЖИТИ</span>
+                <div id="np-load-image-tracking"></div>
+            </button>
+            <div id="np-error-status"></div>
+        </div>
+        <div id="np-second-state">
+            <div id="np-status-icon"></div>
+            <div id="np-status-message"></div>
+            <div class="np-track-mini-logo">
+                <div class="np-line-right"></div>
+                <div class="np-line-left"></div>
+            </div>
+            <a href="#" id="np-more">Детальніше на сайті</a>
+            <div id="np-return-button"><span id="np-return-button-span">Інша посилка</span></div>
+        </div>
+    </div>
+</div>
+
+
+<script type='text/javascript' id='track' charset='utf-8' data-lang='ua' apiKey='d666b248c5678d1951231006bba28096'
+        data-town='city-not-default' data-town-name='undefined' data-town-id='undefined'
+        src='https://apimgmtstorelinmtekiynqw.blob.core.windows.net/content/MediaLibrary/Widget/Tracking/dist/track.min.js'></script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>
