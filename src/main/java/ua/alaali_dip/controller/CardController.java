@@ -94,13 +94,11 @@ public class CardController {
     }
 
     @GetMapping("/rating")
-    public String addRating(@ModelAttribute("rat") String rat, Principal principal,
-                            @ModelAttribute("sellerId") String sellerId, Model model) {
+    public String addRating(@ModelAttribute("rat") String rat, @ModelAttribute("sellerId") String sellerId) {
 
         Visitor visitor = serviceDB.findVisitorById(Long.parseLong(sellerId));
         serviceDB.saveRating(Integer.valueOf(rat), visitor);
 
         return "redirect:/seller_products?sellerId=" + sellerId;
     }
-
 }
