@@ -17,8 +17,12 @@ import java.util.stream.Collectors;
 @Service
 public class VisitorService implements UserDetailsService {
 
+    private final ServiceDB serviceDB;
+
     @Autowired
-    private ServiceDB serviceDB;
+    public VisitorService(ServiceDB serviceDB) {
+        this.serviceDB = serviceDB;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

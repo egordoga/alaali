@@ -25,8 +25,12 @@ public class ProductController {
     private Basket basket;
 
 
+    private final ServiceDB serviceDB;
+
     @Autowired
-    private ServiceDB serviceDB;
+    public ProductController(ServiceDB serviceDB) {
+        this.serviceDB = serviceDB;
+    }
 
     @GetMapping("/add_product")
     public String viewAddProduct(Model model) {

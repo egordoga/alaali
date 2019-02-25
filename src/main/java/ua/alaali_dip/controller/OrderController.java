@@ -23,10 +23,14 @@ import java.util.Map;
 @Controller
 public class OrderController {
 
+    private final ServiceDB serviceDB;
+    private final MailSender mailSender;
+
     @Autowired
-    private ServiceDB serviceDB;
-    @Autowired
-    private MailSender mailSender;
+    public OrderController(ServiceDB serviceDB, MailSender mailSender) {
+        this.serviceDB = serviceDB;
+        this.mailSender = mailSender;
+    }
 
     @GetMapping("/order")
     public String viewOrder(Model model, Principal principal) {
@@ -55,7 +59,7 @@ public class OrderController {
 
         NewPost newPost = serviceDB.findNewPost(orderForm.getCity(), orderForm.getNumber());
 
-        /**
+        /*
          * Конечно, я понимаю, что тут должна быть база с не изменяемым списком Новых почт, а только проверяемым на
          * существование, но пока так...
          */

@@ -34,7 +34,4 @@ public class Visitor {
     @ManyToMany
     @JoinTable(name = "visitor_role", joinColumns = @JoinColumn(name = "visitor_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
-
-    /*@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "visitor_id"))*/
 }

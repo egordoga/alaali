@@ -15,8 +15,12 @@ public class VisitorController {
 
     private String roleName;
 
+    private final ServiceDB serviceDB;
+
     @Autowired
-    private ServiceDB serviceDB;
+    public VisitorController(ServiceDB serviceDB) {
+        this.serviceDB = serviceDB;
+    }
 
     @GetMapping("/registration")
     public String viewRegistration(Model model) {

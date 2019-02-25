@@ -33,8 +33,6 @@ public interface IServiceDB {
 
     Visitor saveVisitor(Visitor visitor, String roleName);
 
-    void saveVisitor(Visitor visitor);
-
     Basket saveBasket(Basket basket);
 
     List<Product> findProductsByBasket(Basket basket);

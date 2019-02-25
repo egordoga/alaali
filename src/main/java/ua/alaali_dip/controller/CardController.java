@@ -18,10 +18,14 @@ import java.util.List;
 @Controller
 public class CardController {
 
+    private final ProductRepository productRepository;
+    private final ServiceDB serviceDB;
+
     @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private ServiceDB serviceDB;
+    public CardController(ProductRepository productRepository, ServiceDB serviceDB) {
+        this.productRepository = productRepository;
+        this.serviceDB = serviceDB;
+    }
 
     @GetMapping(value = "/main")
     public String showMain(@ModelAttribute("sectId") String strId, Model model, Principal principal) {

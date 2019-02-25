@@ -18,35 +18,30 @@ import java.util.*;
 public class ServiceDB implements IServiceDB {
 
 
-    @Autowired
     private VisitorRepository visitorRepository;
-
-    @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
     private GrouppRepository grouppRepository;
-
-    @Autowired
     private SectionRepository sectionRepository;
-
-    @Autowired
     private MailSender mailSender;
-
-    @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     private BasketRepository basketRepository;
-
-    @Autowired
     private NewPostRepository newPostRepository;
+    private RatingRepository ratingRepository;
 
     @Autowired
-    private RatingRepository ratingRepository;
+    public ServiceDB(VisitorRepository visitorRepository, ProductRepository productRepository, GrouppRepository grouppRepository, SectionRepository sectionRepository, MailSender mailSender, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder, BasketRepository basketRepository, NewPostRepository newPostRepository, RatingRepository ratingRepository) {
+        this.visitorRepository = visitorRepository;
+        this.productRepository = productRepository;
+        this.grouppRepository = grouppRepository;
+        this.sectionRepository = sectionRepository;
+        this.mailSender = mailSender;
+        this.roleRepository = roleRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.basketRepository = basketRepository;
+        this.newPostRepository = newPostRepository;
+        this.ratingRepository = ratingRepository;
+    }
 
 
     @Override
@@ -136,11 +131,6 @@ public class ServiceDB implements IServiceDB {
         Role role = roleRepository.findByName(roleName);
         visitor.setRoles(new HashSet<>(Arrays.asList(role)));
         return visitorRepository.save(visitor);
-    }
-
-    @Override
-    public void saveVisitor(Visitor visitor) {
-        visitorRepository.save(visitor);
     }
 
     @Override

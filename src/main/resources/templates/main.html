@@ -25,7 +25,6 @@
                                 aria-haspopup="true" aria-expanded="false" th:text="${groupp.name}">...
                         </button>
                         <div class="dropdown-menu">
-                            <!-- Dropdown menu links -->
                             <ul th:each="section : ${serviceDB.findSectionByGroupp(groupp_id)}">
                                 <li style="list-style-type: none">
                                     <a class="dropdown-item" name="sectId" href="#"

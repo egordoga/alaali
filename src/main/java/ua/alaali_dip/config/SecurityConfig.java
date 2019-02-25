@@ -16,14 +16,9 @@ import javax.sql.DataSource;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
-
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final AccessDeniedHandler accessDeniedHandler;
+    private final DataSource dataSource;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Value("${spring.queries.visitors-query}")
     private String visitorQuery;
@@ -31,27 +26,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
 
+    @Autowired
+    public SecurityConfig(AccessDeniedHandler accessDeniedHandler, DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.accessDeniedHandler = accessDeniedHandler;
+        this.dataSource = dataSource;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/main", "/product", "/login", "/seller", "/buyer").permitAll()
-                .antMatchers("/add_product").hasAuthority("seller")
-                .and().csrf().disable()
-                .formLogin()
-                .loginPage("/login")
-                .failureUrl("/login?error=true")
-                .defaultSuccessUrl("/main")
-                .usernameParameter("email")
-                .passwordParameter("pass")
-                .permitAll()
+                    .authorizeRequests()
+                    .antMatchers("/main", "/product", "/login", "/seller", "/buyer").permitAll()
+                    .antMatchers("/add_product").hasAuthority("seller")
                 .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/main").and().exceptionHandling()
-                .accessDeniedPage("/access-denied")
+                    .csrf().disable()
+                    .formLogin()
+                    .loginPage("/login")
+                    .failureUrl("/login?error=true")
+                    .defaultSuccessUrl("/main")
+                    .usernameParameter("email")
+                    .passwordParameter("pass")
+                    .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/main").and().exceptionHandling()
+                    .accessDeniedPage("/access-denied")
+                .and()
+                    .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
 
     @Override
@@ -66,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web
                 .ignoring()
                 .antMatchers("/resources/**");
