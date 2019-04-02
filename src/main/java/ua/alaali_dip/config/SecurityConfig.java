@@ -19,6 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final AccessDeniedHandler accessDeniedHandler;
     private final DataSource dataSource;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final AuthEntryPoint authEntryPoint;
 
     @Value("${spring.queries.visitors-query}")
     private String visitorQuery;
@@ -27,17 +28,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private String rolesQuery;
 
     @Autowired
-    public SecurityConfig(AccessDeniedHandler accessDeniedHandler, DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public SecurityConfig(AccessDeniedHandler accessDeniedHandler, DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder, AuthEntryPoint authEntryPoint) {
         this.accessDeniedHandler = accessDeniedHandler;
         this.dataSource = dataSource;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.authEntryPoint = authEntryPoint;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                     .authorizeRequests()
-                    .antMatchers("/main", "/product", "/login", "/seller", "/buyer").permitAll()
+                    .antMatchers("/main", "/products", "/auth", "/product", "/login", "/seller", "/buyer").permitAll()
                     .antMatchers("/add_product").hasAuthority("seller")
                 .and()
                     .csrf().disable()
@@ -54,7 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/main").and().exceptionHandling()
                     .accessDeniedPage("/access-denied")
                 .and()
-                    .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                    .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .and()
+                    .httpBasic().authenticationEntryPoint(authEntryPoint);
     }
 
     @Override

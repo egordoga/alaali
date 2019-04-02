@@ -1,5 +1,6 @@
 package ua.alaali_dip.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class NewPost {
     private String city;
 
     @OneToMany(mappedBy = "newPost", cascade = CascadeType.ALL)
+    @JsonBackReference(value = "newPost")
     private List<Basket> baskets;
 
     public NewPost(String city, Integer number) {

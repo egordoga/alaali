@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.alaali_dip.entity.*;
-import ua.alaali_dip.repository.ProductRepository;
 import ua.alaali_dip.service.ServiceDB;
 
 import java.security.Principal;
@@ -18,12 +17,10 @@ import java.util.List;
 @Controller
 public class CardController {
 
-    private final ProductRepository productRepository;
     private final ServiceDB serviceDB;
 
     @Autowired
-    public CardController(ProductRepository productRepository, ServiceDB serviceDB) {
-        this.productRepository = productRepository;
+    public CardController(ServiceDB serviceDB) {
         this.serviceDB = serviceDB;
     }
 
@@ -46,7 +43,7 @@ public class CardController {
         }
         List<Product> products;
         if (strId == null || "".equals(strId)) {
-            products = productRepository.findAll();
+            products = serviceDB.findAllProduct();
         } else {
             Section section = serviceDB.findSectionById(Long.parseLong(strId));
             products = serviceDB.findAllBySection(section);

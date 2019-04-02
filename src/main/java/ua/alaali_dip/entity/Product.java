@@ -1,5 +1,8 @@
 package ua.alaali_dip.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +26,7 @@ public class Product {
     private Integer quantityForOder;
     private String description;
 
+
     @Lob
     private Byte[] pictureFirst;
     @Lob
@@ -37,17 +41,21 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "section_id")
+    @JsonManagedReference(value = "section")
     private Section section;
 
     @ManyToOne
     @JoinColumn(name = "visitor_id")
+    @JsonBackReference(value = "visitor")
     private Visitor visitor;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "basket_product", joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "basket_id"))
+    @JsonBackReference(value = "baskets")
     private List<Basket> baskets;
 
+    @JsonIgnore
     @Transient
     private MultipartFile[] files;
 }

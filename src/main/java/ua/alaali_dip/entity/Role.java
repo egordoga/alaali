@@ -1,5 +1,6 @@
 package ua.alaali_dip.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,5 +22,6 @@ public class Role {
 
     @ManyToMany
     @JoinTable(name = "visitor_role", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "visitor_id"))
+    @JsonBackReference(value = "roles")
     private Collection<Visitor> visitors;
 }

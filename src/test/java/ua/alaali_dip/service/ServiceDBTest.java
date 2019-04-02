@@ -160,23 +160,6 @@ public class ServiceDBTest {
         assertThat(findVisitor, is(equalTo(visitor)));
     }
 
-    @Ignore //так и не поборол
-    @Test
-    public void testSaveVisitor() {
-        visitor.setPass("hh");
-        //when(bCryptPasswordEncoderMoc.encode(visitor.getPass())).thenReturn("foo");
-        //when(visitor.getPass()).thenReturn("foo");
-        visitor.setPass(bCryptPasswordEncoderMoc.encode(visitor.getPass()));
-        visitor.setActive((byte) 0);
-        visitor.setBasket(new Basket(visitor));
-        when(roleRepositoryMoc.findByName("aa")).thenReturn(role);
-        visitor.setRoles(new HashSet<>(Arrays.asList(role)));
-        when(visitorRepositoryMoc.save(visitor)).thenReturn(visitor);
-        Visitor saveVisitor = serviceDB.saveVisitor(visitor, "aa");
-        assertThat(saveVisitor, is(equalTo(visitor)));
-        // assertEquals("hhh", serviceDB.saveVisitor(visitor, null));
-    }
-
     @Test
     public void testSaveBasket() {
         when(basketRepositoryMoc.save(basket)).thenReturn(basket);

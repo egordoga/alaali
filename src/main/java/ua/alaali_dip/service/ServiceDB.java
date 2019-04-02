@@ -189,6 +189,16 @@ public class ServiceDB implements IServiceDB {
         visitorRepository.save(visitor);
     }
 
+    @Override
+    public List<Product> findAllProduct() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> findProductsBySection_Id(Long id) {
+        return productRepository.findAllBySection_Id(id);
+    }
+
     public boolean activateVisitor(String code) {
         Visitor visitor = visitorRepository.findByActivationCode(code);
         if (visitor == null) {

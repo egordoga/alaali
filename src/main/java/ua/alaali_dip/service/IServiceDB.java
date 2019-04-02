@@ -46,4 +46,8 @@ public interface IServiceDB {
     List<Product> findProductByString(String string);
 
     void saveRating(Integer rating, Visitor visitor);
+
+    List<Product> findAllProduct();
+
+    List<Product> findProductsBySection_Id(Long id);
 }

@@ -1,5 +1,6 @@
 package ua.alaali_dip.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,5 +20,6 @@ public class Rating {
     private Double value;
 
     @OneToOne(mappedBy = "rating")
+    @JsonBackReference(value = "rating")
     private Visitor visitor;
 }
