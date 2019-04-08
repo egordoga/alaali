@@ -1,16 +1,18 @@
 package ua.alaali_dip.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import ua.alaali_dip.entity.Basket;
 import ua.alaali_dip.entity.Groupp;
 import ua.alaali_dip.entity.Product;
+import ua.alaali_dip.entity.Visitor;
+import ua.alaali_dip.model.ProductDTO;
 import ua.alaali_dip.service.ServiceDB;
 import ua.alaali_dip.util.ResizeImage;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -67,6 +69,59 @@ public class AppRest {
     @GetMapping("/auth")
     public boolean doAuth(Principal principal) {
         return principal != null;
+    }
+
+    @GetMapping("/add_product/{id}/{quantity}")
+    @ResponseStatus(HttpStatus.OK)
+    public void addProductToBasket(@PathVariable long id, @PathVariable int quantity, Principal principal) {
+        if (principal != null) {
+            Visitor visitor = serviceDB.findVisitorByEmail(principal.getName());
+            Basket basket = serviceDB.findBasketByVisitor(visitor);
+            if (basket == null) {
+                serviceDB.saveBasket(new Basket(visitor));
+            }
+            Product product = serviceDB.findProductById(id);
+            product.setQuantityForOder(quantity);
+            basket.getProducts().add(product);
+            serviceDB.saveBasket(basket);
+        }
+    }
+
+    @GetMapping("/basket")
+    public List<ProductDTO> getBasket(Principal principal) {
+        List<ProductDTO> list = new ArrayList<>();
+        if (principal != null) {
+            Visitor visitor = serviceDB.findVisitorByEmail(principal.getName());
+            Basket basket = serviceDB.findBasketByVisitor(visitor);
+            list = makeListDTO(basket);
+        }
+        return list;
+    }
+
+    @DeleteMapping("basket/{id}")
+    public List<ProductDTO> deleteProductFromBasket(@PathVariable Long id, Principal principal) {
+        List<ProductDTO> list = new ArrayList<>();
+        if (principal != null) {
+            Visitor visitor = serviceDB.findVisitorByEmail(principal.getName());
+            Basket basket = serviceDB.findBasketByVisitor(visitor);
+            for (Product product : basket.getProducts()) {
+                if (product.getId().equals(id)) {
+                    basket.getProducts().remove(product);
+                    serviceDB.saveBasket(basket);
+                }
+            }
+            list = makeListDTO(basket);
+        }
+        return list;
+    }
+
+    private List<ProductDTO> makeListDTO(Basket basket) {
+        List<ProductDTO> list = new ArrayList<>();
+        for (Product product : basket.getProducts()) {
+            ProductDTO dto = ProductDTO.convertToDTO(product);
+            list.add(dto);
+        }
+        return list;
     }
 
 
