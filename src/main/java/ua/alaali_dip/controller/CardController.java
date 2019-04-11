@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.alaali_dip.entity.*;
+import ua.alaali_dip.service.IServiceDB;
 import ua.alaali_dip.service.ServiceDB;
 
 import java.security.Principal;
@@ -17,10 +18,10 @@ import java.util.List;
 @Controller
 public class CardController {
 
-    private final ServiceDB serviceDB;
+    private final IServiceDB serviceDB;
 
     @Autowired
-    public CardController(ServiceDB serviceDB) {
+    public CardController(IServiceDB serviceDB) {
         this.serviceDB = serviceDB;
     }
 

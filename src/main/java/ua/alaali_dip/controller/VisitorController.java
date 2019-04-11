@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.alaali_dip.entity.Visitor;
+import ua.alaali_dip.service.IServiceDB;
 import ua.alaali_dip.service.ServiceDB;
 
 @Controller
@@ -15,10 +16,10 @@ public class VisitorController {
 
     private String roleName;
 
-    private final ServiceDB serviceDB;
+    private final IServiceDB serviceDB;
 
     @Autowired
-    public VisitorController(ServiceDB serviceDB) {
+    public VisitorController(IServiceDB serviceDB) {
         this.serviceDB = serviceDB;
     }
 

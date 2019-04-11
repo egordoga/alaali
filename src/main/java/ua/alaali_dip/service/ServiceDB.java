@@ -199,6 +199,7 @@ public class ServiceDB implements IServiceDB {
         return productRepository.findAllBySection_Id(id);
     }
 
+    @Override
     public boolean activateVisitor(String code) {
         Visitor visitor = visitorRepository.findByActivationCode(code);
         if (visitor == null) {

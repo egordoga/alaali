@@ -50,4 +50,6 @@ public interface IServiceDB {
     List<Product> findAllProduct();
 
     List<Product> findProductsBySection_Id(Long id);
+
+    boolean activateVisitor(String code);
 }

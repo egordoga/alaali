@@ -12,6 +12,7 @@ import ua.alaali_dip.entity.Basket;
 import ua.alaali_dip.entity.Product;
 import ua.alaali_dip.entity.Section;
 import ua.alaali_dip.entity.Visitor;
+import ua.alaali_dip.service.IServiceDB;
 import ua.alaali_dip.service.ServiceDB;
 
 import java.io.IOException;
@@ -24,11 +25,10 @@ public class ProductController {
     private Product product;
     private Basket basket;
 
-
-    private final ServiceDB serviceDB;
+    private final IServiceDB serviceDB;
 
     @Autowired
-    public ProductController(ServiceDB serviceDB) {
+    public ProductController(IServiceDB serviceDB) {
         this.serviceDB = serviceDB;
     }
 

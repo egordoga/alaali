@@ -11,6 +11,7 @@ import ua.alaali_dip.entity.NewPost;
 import ua.alaali_dip.entity.Product;
 import ua.alaali_dip.entity.Visitor;
 import ua.alaali_dip.model.OrderForm;
+import ua.alaali_dip.service.IServiceDB;
 import ua.alaali_dip.service.MailSender;
 import ua.alaali_dip.service.ServiceDB;
 
@@ -23,11 +24,11 @@ import java.util.Map;
 @Controller
 public class OrderController {
 
-    private final ServiceDB serviceDB;
+    private final IServiceDB serviceDB;
     private final MailSender mailSender;
 
     @Autowired
-    public OrderController(ServiceDB serviceDB, MailSender mailSender) {
+    public OrderController(IServiceDB serviceDB, MailSender mailSender) {
         this.serviceDB = serviceDB;
         this.mailSender = mailSender;
     }

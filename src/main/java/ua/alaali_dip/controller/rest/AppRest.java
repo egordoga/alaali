@@ -8,6 +8,7 @@ import ua.alaali_dip.entity.Groupp;
 import ua.alaali_dip.entity.Product;
 import ua.alaali_dip.entity.Visitor;
 import ua.alaali_dip.model.ProductDTO;
+import ua.alaali_dip.service.IServiceDB;
 import ua.alaali_dip.service.ServiceDB;
 import ua.alaali_dip.util.ResizeImage;
 
@@ -23,11 +24,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class AppRest {
 
-    private final ServiceDB serviceDB;
+    private final IServiceDB serviceDB;
     private final ResizeImage resizeImage;
 
     @Autowired
-    public AppRest(ServiceDB serviceDB, ResizeImage resizeImage) {
+    public AppRest(IServiceDB serviceDB, ResizeImage resizeImage) {
         this.serviceDB = serviceDB;
         this.resizeImage = resizeImage;
     }
